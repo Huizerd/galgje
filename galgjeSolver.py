@@ -6,7 +6,7 @@ from operator import itemgetter
 
 def listWords(wordFile):
 
-	with open(wordFile, "rb") as w:
+	with open(wordFile, "r") as w:
 
 		wordList = w.readlines()
 
@@ -87,7 +87,7 @@ def updateWordList(wordList, length=None, containsChar=None, notContainsChar=Non
 
 def solver(wordList):
 
-	wordLength = int(raw_input("\nEnter the length of the word: "))
+	wordLength = int(input("\nEnter the length of the word: "))
 
 	# Limit word list to word length
 	wordList = updateWordList(wordList, length=wordLength)
@@ -101,7 +101,7 @@ def solver(wordList):
 	guessCharCorrect 	= []
 	guessCharFalse 		= []
 	charLeft 			= wordLength
-	wordView 			= ["-" for i in xrange(wordLength)]
+	wordView 			= ["-" for i in range(wordLength)]
 
 	while guesses > 0 and charLeft > 0 and len(wordList) > 1:
 
@@ -114,16 +114,16 @@ def solver(wordList):
 		viewCharFreq(characterWordFreq, guessCharCorrect, guessCharFalse)
 
 		# Input guess
-		guessChar = raw_input("\nWhich character are you going to guess? (lowercase) ")
-		guessCorrect = raw_input("\nWas this guess correct? [y/n] ")
+		guessChar = input("\nWhich character are you going to guess? (lowercase) ")
+		guessCorrect = input("\nWas this guess correct? [y/n] ")
 
 		while guessCorrect != "y" and guessCorrect != "n":
 
-			guessCorrect = raw_input("\nWas this guess correct? [y/n] ")
+			guessCorrect = input("\nWas this guess correct? [y/n] ")
 
 		if guessCorrect == "y":
 
-			placeChar = raw_input("\nWhat are the positions of %s? (1-indexed) " %(guessChar)).strip().split(" ")
+			placeChar = input("\nWhat are the positions of %s? (1-indexed) " %(guessChar)).strip().split(" ")
 			placeChar = [int(p)-1 for p in placeChar]
 
 			wordList = updateWordList(wordList, containsChar=guessChar, places=placeChar)
